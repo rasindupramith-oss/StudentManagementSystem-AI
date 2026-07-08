@@ -79,5 +79,55 @@ public class StudentManager {
                 student.getGpa());
     }
 
+    public int getTotalStudents() {
+        return students.size();
+    }
+
+    public double getAverageGpa() {
+        if (students.isEmpty()) {
+            return 0;
+        }
+
+        double total = 0;
+
+        for (Student currentStudent : students) {
+            total += currentStudent.getGpa();
+        }
+
+        return total / students.size();
+    }
+
+    public double getHighestGpa() {
+        if (students.isEmpty()) {
+            return 0;
+        }
+
+        double highest = students.get(0).getGpa();
+
+        for (Student currentStudent : students) {
+            if (currentStudent.getGpa() > highest) {
+                highest = currentStudent.getGpa();
+            }
+        }
+
+        return highest;
+    }
+
+    public double getLowestGpa() {
+        if (students.isEmpty()) {
+            return 0;
+        }
+
+        double lowest = students.get(0).getGpa();
+
+        for (Student currentStudent : students) {
+            if (currentStudent.getGpa() < lowest) {
+                lowest = currentStudent.getGpa();
+            }
+        }
+
+        return lowest;
+    }
+
 
 }

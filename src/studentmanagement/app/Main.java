@@ -21,7 +21,8 @@ public class Main {
             System.out.println("3. Search Student");
             System.out.println("4. Update Student");
             System.out.println("5. Delete Student");
-            System.out.println("6. Exit");
+            System.out.println("6. View Statistics");
+            System.out.println("7. Exit");
             System.out.print("Enter your choice: ");
 
             int choice = scanner.nextInt();
@@ -130,6 +131,18 @@ public class Main {
                     break;
 
                 case 6:
+                    System.out.println("\n========== Student Statistics ==========");
+
+                    System.out.println("Total Students : " + manager.getTotalStudents());
+
+                    System.out.printf("Average GPA    : %.2f%n", manager.getAverageGpa());
+
+                    System.out.printf("Highest GPA    : %.2f%n", manager.getHighestGpa());
+
+                    System.out.printf("Lowest GPA     : %.2f%n", manager.getLowestGpa());
+                    break;
+
+                case 7:
                     running = false;
                     scanner.close();
                     System.out.println("Thank you for using the system.");
