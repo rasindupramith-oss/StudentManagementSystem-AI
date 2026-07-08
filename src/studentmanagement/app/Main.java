@@ -33,13 +33,9 @@ public class Main {
                     System.out.println("\n----- Add Student -----");
 
                     String studentId = readNonEmptyString(scanner, "Enter Student ID: ");
-
                     String name = readNonEmptyString(scanner, "Enter Name: ");
-
                     int age = readPositiveAge(scanner, "Enter Age: ");
-
                     String course = readNonEmptyString(scanner, "Enter Course: ");
-
                     double gpa = readGpa(scanner, "Enter GPA: ");
 
                     Student s1 = new Student(studentId, name, age, course, gpa);
@@ -59,10 +55,7 @@ public class Main {
 
                 case 3:
                     System.out.println("\n----- Search Student -----");
-                    System.out.print("Enter Student ID: ");
-                    String searchId = scanner.next();
-
-                    Student foundStudent = manager.searchStudentById(searchId);
+                    Student foundStudent = findStudentById(manager, scanner);
 
                     if (foundStudent != null) {
                         System.out.println("\nStudent Found:");
@@ -74,11 +67,7 @@ public class Main {
 
                 case 4:
                     System.out.println("\n----- Update Student -----");
-                    System.out.print("Enter Student ID: ");
-                    String updateId = scanner.next();
-                    scanner.nextLine();
-
-                    Student studentToUpdate = manager.searchStudentById(updateId);
+                    Student studentToUpdate = findStudentById(manager, scanner);
 
                     if (studentToUpdate == null){
                         System.out.println("\nStudent not found.");
@@ -87,14 +76,10 @@ public class Main {
                         displayStudent(studentToUpdate);
 
                         String updateName = readNonEmptyString(scanner, "Enter new Name: ");
-
                         int updateAge = readPositiveAge(scanner, "Enter new Age: ");
-
                         String updateCourse = readNonEmptyString(scanner, "Enter new Course: ");
-
                         double updateGpa = readGpa(scanner, "Enter new GPA: ");
-
-                        boolean updated = manager.updateStudent(updateId, updateName, updateAge, updateCourse, updateGpa);
+                        boolean updated = manager.updateStudent(studentToUpdate.getStudentId(), updateName, updateAge, updateCourse, updateGpa);
 
                         if (updated) {
                             System.out.println("\nStudent updated successfully!");
@@ -107,11 +92,7 @@ public class Main {
 
                 case 5:
                     System.out.println("\n----- Delete Student -----");
-                    System.out.print("Enter Student ID: ");
-                    String deleteId = scanner.next();
-                    scanner.nextLine();
-
-                    Student studentToDelete = manager.searchStudentById(deleteId);
+                    Student studentToDelete = findStudentById(manager, scanner);
 
                     if (studentToDelete == null){
                         System.out.println("\nStudent not found.");
@@ -122,7 +103,7 @@ public class Main {
                         String decision = scanner.next();
 
                         if (decision.equalsIgnoreCase("Y") ){
-                            manager.deleteStudent(deleteId);
+                            manager.deleteStudent(studentToDelete.getStudentId());
                             System.out.println("\nStudent deleted successfully!");
                         } else {
                             System.out.println("\nDeletion cancelled.");
@@ -132,13 +113,9 @@ public class Main {
 
                 case 6:
                     System.out.println("\n========== Student Statistics ==========");
-
                     System.out.println("Total Students : " + manager.getTotalStudents());
-
                     System.out.printf("Average GPA    : %.2f%n", manager.getAverageGpa());
-
                     System.out.printf("Highest GPA    : %.2f%n", manager.getHighestGpa());
-
                     System.out.printf("Lowest GPA     : %.2f%n", manager.getLowestGpa());
                     break;
 
@@ -209,6 +186,11 @@ public class Main {
                 student.getGpa());
 
         System.out.println("---------------------------------------------------------------");
+    }
+
+    private static Student findStudentById(StudentManager manager, Scanner scanner) {
+        String studentId = readNonEmptyString(scanner, "Enter Student ID: ");
+        return manager.searchStudentById(studentId);
     }
 
 
