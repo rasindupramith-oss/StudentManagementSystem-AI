@@ -25,18 +25,9 @@ public class StudentManager {
             return;
         }
 
-        System.out.println("\n---------------------------------------------------------------");
-        System.out.printf("%-10s %-20s %-5s %-20s %-5s%n",
-                "ID", "Name", "Age", "Course", "GPA");
-        System.out.println("---------------------------------------------------------------");
-
+        printTableHeader();
         for (Student currentStudent : students) {
-            System.out.printf("%-10s %-20s %-5d %-20s %-5.2f%n",
-                    currentStudent.getStudentId(),
-                    currentStudent.getName(),
-                    currentStudent.getAge(),
-                    currentStudent.getCourse(),
-                    currentStudent.getGpa());
+            printStudent(currentStudent);
         }
 
         System.out.println("---------------------------------------------------------------");
@@ -71,4 +62,22 @@ public class StudentManager {
         students.remove(foundStudent);
         return true;
     }
+
+    private void printTableHeader() {
+        System.out.println("\n---------------------------------------------------------------");
+        System.out.printf("%-10s %-20s %-5s %-20s %-5s%n",
+                "ID", "Name", "Age", "Course", "GPA");
+        System.out.println("---------------------------------------------------------------");
+    }
+
+    private void printStudent(Student student) {
+        System.out.printf("%-10s %-20s %-5d %-20s %-5.2f%n",
+                student.getStudentId(),
+                student.getName(),
+                student.getAge(),
+                student.getCourse(),
+                student.getGpa());
+    }
+
+
 }
