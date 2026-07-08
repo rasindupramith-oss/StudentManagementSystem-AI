@@ -65,19 +65,7 @@ public class Main {
 
                     if (foundStudent != null) {
                         System.out.println("\nStudent Found:");
-                        System.out.println("---------------------------------------------------------------");
-                        System.out.printf("%-10s %-20s %-5s %-20s %-5s%n",
-                                "ID", "Name", "Age", "Course", "GPA");
-                        System.out.println("---------------------------------------------------------------");
-
-                        System.out.printf("%-10s %-20s %-5d %-20s %-5.2f%n",
-                                foundStudent.getStudentId(),
-                                foundStudent.getName(),
-                                foundStudent.getAge(),
-                                foundStudent.getCourse(),
-                                foundStudent.getGpa());
-
-                        System.out.println("---------------------------------------------------------------");
+                        displayStudent(foundStudent);
                     } else {
                         System.out.println("\nStudent not found.");
                     }
@@ -95,19 +83,7 @@ public class Main {
                         System.out.println("\nStudent not found.");
                     } else {
                         System.out.println("\nCurrent Student Details:");
-                        System.out.println("---------------------------------------------------------------");
-                        System.out.printf("%-10s %-20s %-5s %-20s %-5s%n",
-                                "ID", "Name", "Age", "Course", "GPA");
-                        System.out.println("---------------------------------------------------------------");
-
-                        System.out.printf("%-10s %-20s %-5d %-20s %-5.2f%n",
-                                studentToUpdate.getStudentId(),
-                                studentToUpdate.getName(),
-                                studentToUpdate.getAge(),
-                                studentToUpdate.getCourse(),
-                                studentToUpdate.getGpa());
-
-                        System.out.println("---------------------------------------------------------------");
+                        displayStudent(studentToUpdate);
 
                         String updateName = readNonEmptyString(scanner, "Enter new Name: ");
 
@@ -140,19 +116,7 @@ public class Main {
                         System.out.println("\nStudent not found.");
                     } else {
                         System.out.println("\nCurrent Student Details:");
-                        System.out.println("---------------------------------------------------------------");
-                        System.out.printf("%-10s %-20s %-5s %-20s %-5s%n",
-                                "ID", "Name", "Age", "Course", "GPA");
-                        System.out.println("---------------------------------------------------------------");
-
-                        System.out.printf("%-10s %-20s %-5d %-20s %-5.2f%n",
-                                studentToDelete.getStudentId(),
-                                studentToDelete.getName(),
-                                studentToDelete.getAge(),
-                                studentToDelete.getCourse(),
-                                studentToDelete.getGpa());
-
-                        System.out.println("---------------------------------------------------------------");
+                        displayStudent(studentToDelete);
                         System.out.print("Are you sure you want to delete this student? (Y/N): ");
                         String decision = scanner.next();
 
@@ -216,6 +180,22 @@ public class Main {
             }
             System.out.println("GPA must be between 0.0 and 4.0.");
         }
+    }
+
+    private static void displayStudent(Student student) {
+        System.out.println("---------------------------------------------------------------");
+        System.out.printf("%-10s %-20s %-5s %-20s %-5s%n",
+                "ID", "Name", "Age", "Course", "GPA");
+        System.out.println("---------------------------------------------------------------");
+
+        System.out.printf("%-10s %-20s %-5d %-20s %-5.2f%n",
+                student.getStudentId(),
+                student.getName(),
+                student.getAge(),
+                student.getCourse(),
+                student.getGpa());
+
+        System.out.println("---------------------------------------------------------------");
     }
 
 
