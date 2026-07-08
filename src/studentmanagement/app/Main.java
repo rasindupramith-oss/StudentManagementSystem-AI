@@ -25,59 +25,21 @@ public class Main {
             System.out.print("Enter your choice: ");
 
             int choice = scanner.nextInt();
+            scanner.nextLine();
 
             switch (choice) {
                 case 1:
                     System.out.println("\n----- Add Student -----");
-                    System.out.print("Enter Student ID: ");
-                    String studentId = scanner.next();
-                    scanner.nextLine();
 
-                    String name;
-                    while (true) {
-                        System.out.print("Enter Name: ");
-                        name = scanner.nextLine();
+                    String studentId = readNonEmptyString(scanner, "Enter Student ID: ");
 
-                        if (!name.trim().isEmpty()) {
-                            break;
-                        }
-                        System.out.println("Name cannot be empty.");
-                    }
+                    String name = readNonEmptyString(scanner, "Enter Name: ");
 
-                    int age;
-                    while (true) {
-                        System.out.print("Enter Age: ");
-                        age = scanner.nextInt();
+                    int age = readPositiveAge(scanner, "Enter Age: ");
 
-                        if (age > 0) {
-                            break;
-                        }
-                        System.out.println("Age must be greater than 0.");
-                    }
-                    scanner.nextLine();
+                    String course = readNonEmptyString(scanner, "Enter Course: ");
 
-                    String course;
-                    while (true) {
-                        System.out.print("Enter Course: ");
-                        course = scanner.nextLine();
-
-                        if (!course.trim().isEmpty()) {
-                            break;
-                        }
-
-                        System.out.println("Course cannot be empty.");
-                    }
-
-                    double gpa;
-                    while (true) {
-                        System.out.print("Enter GPA: ");
-                        gpa = scanner.nextDouble();
-
-                        if (gpa >= 0 && gpa <= 4) {
-                            break;
-                        }
-                        System.out.println("GPA must be between 0.0 and 4.0");
-                    }
+                    double gpa = readGpa(scanner, "Enter GPA: ");
 
                     Student s1 = new Student(studentId, name, age, course, gpa);
                     boolean added = manager.addStudent(s1);
@@ -249,4 +211,45 @@ public class Main {
             System.out.println();
         }
     }
+
+    private static String readNonEmptyString(Scanner scanner, String message) {
+        String input;
+        while (true) {
+            System.out.print(message);
+            input = scanner.nextLine();
+
+            if (!input.trim().isEmpty()) {
+                return input;
+            }
+            System.out.println("Input cannot be empty.");
+        }
+    }
+
+    private static int readPositiveAge(Scanner scanner, String message) {
+        while (true) {
+            System.out.print(message);
+            int age = scanner.nextInt();
+            scanner.nextLine();
+
+            if (age > 0) {
+                return age;
+            }
+            System.out.println("Age must be greater than 0.");
+        }
+    }
+
+    private static double readGpa(Scanner scanner, String message) {
+        while (true) {
+            System.out.print(message);
+            double gpa = scanner.nextDouble();
+            scanner.nextLine();
+
+            if (gpa >= 0 && gpa <= 4) {
+                return gpa;
+            }
+            System.out.println("GPA must be between 0.0 and 4.0.");
+        }
+    }
+
+
 }
