@@ -109,54 +109,21 @@ public class Main {
 
                         System.out.println("---------------------------------------------------------------");
 
-                        String updateName;
-                        while (true) {
-                            System.out.print("Enter new Name: ");
-                            updateName = scanner.nextLine();
+                        String updateName = readNonEmptyString(scanner, "Enter new Name: ");
 
-                            if (!updateName.trim().isEmpty()) {
-                                break;
-                            }
-                            System.out.println("Name cannot be empty.");
+                        int updateAge = readPositiveAge(scanner, "Enter new Age: ");
+
+                        String updateCourse = readNonEmptyString(scanner, "Enter new Course: ");
+
+                        double updateGpa = readGpa(scanner, "Enter new GPA: ");
+
+                        boolean updated = manager.updateStudent(updateId, updateName, updateAge, updateCourse, updateGpa);
+
+                        if (updated) {
+                            System.out.println("\nStudent updated successfully!");
+                        } else {
+                            System.out.println("\nStudent update failed.");
                         }
-
-                        int updateAge;
-                        while (true) {
-                            System.out.print("Enter new Age: ");
-                            updateAge = scanner.nextInt();
-
-                            if (updateAge > 0) {
-                                break;
-                            }
-                            System.out.println("Age must be greater than 0.");
-                        }
-                        scanner.nextLine();
-
-                        String updateCourse;
-                        while (true) {
-                            System.out.print("Enter new Course: ");
-                            updateCourse = scanner.nextLine();
-
-                            if (!updateCourse.trim().isEmpty()) {
-                                break;
-                            }
-                            System.out.println("Course cannot be empty.");
-                        }
-
-                        double updateGpa;
-                        while (true) {
-                            System.out.print("Enter new GPA: ");
-                            updateGpa = scanner.nextDouble();
-
-                            if (updateGpa >= 0.0 && updateGpa <= 4.0) {
-                                break;
-                            }
-                            System.out.println("GPA must be between 0.0 and 4.0.");
-                        }
-
-                        manager.updateStudent(updateId, updateName, updateAge, updateCourse, updateGpa);
-
-                        System.out.println("Student updated successfully!");
                     }
 
                     break;
